@@ -6,6 +6,4 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Util.prefectures.each do |prefecture|
-  Prefecture.find_or_create_by(name: prefecture["name"])
-end
+Util.seed
