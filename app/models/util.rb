@@ -35,6 +35,11 @@ class Util
         end
       else
         m = Municipality.find_or_create_by(prefecture_id: p.id, gun_id: nil, name: chash['name'])
+        if chash['wards'].present?
+          chash['wards'].each do |whash|
+            SubMunicipality.find_or_create_by(municipality_id: m.id, name: whash['name'])
+          end
+        end
       end
     end
   end
