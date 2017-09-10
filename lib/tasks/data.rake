@@ -28,4 +28,24 @@ namespace :data do
       a.save!
     end
   end
+
+  task :train => :environment do
+    attrs = %w{prefecture gun municipality other}
+
+    data = []
+
+    Address.where('id > 1000').find_each do |a|
+      inner = []
+      attrs.each do |attr|
+        v = a.send(attr)
+        next if v.blank?
+        v.chars.each do |ch|
+          inner << "#{ch} n #{attr}"
+        end
+      end
+      data << inner
+    end
+    model = Wapiti.train(data, {pattern:'data/pattern.txt'})
+    model.save("result.mod")
+  end
 end
