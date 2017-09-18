@@ -20,8 +20,10 @@ namespace :data do
 
 
       if m.sub_municipalities.size > 0 #with_sub?
-        a.other = m.sub_municipalities.all.sample
+        other = m.sub_municipalities.all.sample
       end
+
+      other += ''
 
       a.full_address = [a.prefecture, a.gun, a.municipality, a.other].compact.join
 
